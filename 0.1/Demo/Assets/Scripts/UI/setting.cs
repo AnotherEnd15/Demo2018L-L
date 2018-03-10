@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class setting : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+
          music = find_obj(gameObject, "bg/sound" );
          resol = find_obj(gameObject, "bg/resolution"); 
 
@@ -61,7 +64,12 @@ public class setting : MonoBehaviour {
         });
 
     }
-
+    void DealWithConnectState(int value)
+    {
+        //0 :success
+        //1 :failed
+        //2 :timeout
+    }
     /// <param name="path">路径</param>
     /// <param name="obj">父物体</param>
     GameObject find_obj(GameObject obj, string path)

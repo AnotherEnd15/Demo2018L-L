@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 public struct VolumnAndResolution
 {
     public int volumn;
     public int screenHeight;
     public int screenWidth;
+
 }
 /// <summary>
 /// 实现SDK的逻辑和客户端自身的逻辑利用中间层分离，万一SDK进行了更新，只用更改中间层即可
@@ -26,7 +28,7 @@ public class SDKMgr {
     public SDKMgr()
     {
         EventDispatcher.Instance.AddListener("UploadGeneralSetting", UploadGeneralSetting);//添加上传通用设置的监听
-        EventDispatcher.Instance.AddListener("DownloadGeneralSetting", DownloadGeneralSetting);//添加上传通用设置的监听
+        EventDispatcher.Instance.AddListener("DownloadGeneralSetting", DownloadGeneralSetting);//添加下载通用设置的监听
 
         //调用方法为 EventDispatcher.Instance.DispatchEvent("XXXX"); 中间的XXX填监听的事件名。任意地方调用该语句，即可触发对应事件
          
@@ -36,7 +38,7 @@ public class SDKMgr {
     {
         BaseArg<VolumnAndResolution, Action<int>> _arg = arg as BaseArg<VolumnAndResolution, Action<int>>;
         GeneralSetting gs = new GeneralSetting();
-        gs.screenHeight = _arg.valueA.screenHeight;
+        gs.screenHeight = _arg.valueA.screenHeight ;
         gs.screenWidth = _arg.valueA.screenWidth;
         gs.volumn = _arg.valueA.volumn;
 
