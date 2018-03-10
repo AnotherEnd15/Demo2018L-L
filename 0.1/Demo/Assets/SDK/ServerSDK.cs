@@ -9,12 +9,7 @@ public struct GeneralSetting
     public int screenHeight;
     public int screenWidth;
 }
-public enum LoadState
-{
-    Success,
-    Failed,
-    Timeout
-}
+
 
 
 public class ServerSDK {
@@ -35,7 +30,7 @@ public class ServerSDK {
     /// </summary>
     /// <param name="gs"></param>
     /// <param name="callback"></param>
-    public void UploadGeneralSetting(GeneralSetting gs,Action<LoadState> callback)
+    public void UploadGeneralSetting(GeneralSetting gs,Action<int> callback)
     {
         
     }
@@ -43,7 +38,7 @@ public class ServerSDK {
     /// 获得用户设置
     /// </summary>
     /// <param name="callback">下载完成后的回调</param>
-    public void DownloadGeneralSetting(Action<LoadState, GeneralSetting> callback)
+    public void DownloadGeneralSetting(Action<int, GeneralSetting> callback)
     {
 
     }
