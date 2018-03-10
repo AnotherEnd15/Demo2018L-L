@@ -27,6 +27,10 @@ public class SDKMgr {
     {
         EventDispatcher.Instance.AddListener("UploadGeneralSetting", UploadGeneralSetting);//添加上传通用设置的监听
         EventDispatcher.Instance.AddListener("DownloadGeneralSetting", DownloadGeneralSetting);//添加上传通用设置的监听
+
+        //调用方法为 EventDispatcher.Instance.DispatchEvent("XXXX"); 中间的XXX填监听的事件名。任意地方调用该语句，即可触发对应事件
+         
+         
     }
     public void UploadGeneralSetting(IEventArgs arg)
     {
