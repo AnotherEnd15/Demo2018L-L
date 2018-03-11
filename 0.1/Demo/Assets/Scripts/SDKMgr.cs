@@ -3,13 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-public struct VolumnAndResolution
-{
-    public int volumn;
-    public int screenHeight;
-    public int screenWidth;
 
-}
 /// <summary>
 /// 实现SDK的逻辑和客户端自身的逻辑利用中间层分离，万一SDK进行了更新，只用更改中间层即可
 /// </summary>

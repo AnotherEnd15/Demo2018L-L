@@ -11,6 +11,7 @@ public interface ISettingView
 
     event Action<int> UpdateVolumnEventHandler;
     event Action StartUpdateViewEventHandler;
+    event Action<int, int> UpdateResolutionEventHandler;
 }
 public interface ISettingModel 
 {
@@ -18,6 +19,8 @@ public interface ISettingModel
     void UploadResolution(int width, int height);
 
     void DownloadGeneralSetting(Action<VolumnAndResolution> action);
+
+    event Action<VolumnAndResolution> ReceiveGeneralSettingDataEventHandler;
 }
 
 
@@ -30,15 +33,27 @@ public class SettingViewPresenter : MonoBehaviour {
         mView = transform.GetComponent<ISettingView>();
         mModel = transform.GetComponent<ISettingModel>();
     }
+    private void OnEnable()
+    {
+        OnEnter();
+    }
+    private void OnDisable()
+    {
+        OnExit();
+    }
     void OnEnter()
     {
         mView.UpdateVolumnEventHandler += UploadVolumn;
         mView.StartUpdateViewEventHandler += StartUpdateView;
+        mView.UpdateResolutionEventHandler += UploadResolution;
+        mModel.ReceiveGeneralSettingDataEventHandler += SetVolumnAndResoulution;
     }
     void OnExit()
     {
         mView.UpdateVolumnEventHandler -= UploadVolumn;
         mView.StartUpdateViewEventHandler -= StartUpdateView;
+        mView.UpdateResolutionEventHandler -= UploadResolution;
+        mModel.ReceiveGeneralSettingDataEventHandler -= SetVolumnAndResoulution;
     }
 
     public void UploadVolumn(int value)
@@ -54,6 +69,15 @@ public class SettingViewPresenter : MonoBehaviour {
         mView.SetResolution(var.screenWidth, var.screenHeight);
         mView.SetVolumn(var.volumn);
     }
+    void UploadResolution(int width, int height)
+    {
+        mModel.UploadResolution(width, height);
+    }
 
+    void SetVolumnAndResoulution(VolumnAndResolution var)
+    {
+        mView.SetResolution(var.screenWidth, var.screenHeight);
+        mView.SetVolumn(var.volumn);
+    }
 
 }
