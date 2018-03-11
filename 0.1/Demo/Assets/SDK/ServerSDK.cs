@@ -34,7 +34,8 @@ public class ServerSDK {
     public void UploadGeneralSetting(GeneralSetting gs,Action<int> callback)
     {
         File.WriteAllText(SettingDataSavePath, gs.volumn.ToString() + "_" + gs.screenWidth.ToString() + "_" + gs.screenHeight.ToString());
-        callback(0);
+        if (callback != null)
+            callback(0);
     }
     /// <summary>
     /// 获得用户设置
@@ -43,11 +44,19 @@ public class ServerSDK {
     public void DownloadGeneralSetting(Action<int, GeneralSetting> callback)
     {
         string[] strs = File.ReadAllText(SettingDataSavePath).Split('_');
-        GeneralSetting gs = new GeneralSetting();
-        gs.volumn = Int32.Parse(strs[0]);
-        gs.screenWidth= Int32.Parse(strs[1]);
-        gs.screenHeight = Int32.Parse(strs[2]);
-        callback(0, gs);
+        if (strs.Length == 3)
+        {
+            GeneralSetting gs = new GeneralSetting();
+            gs.volumn = Int32.Parse(strs[0]);
+            gs.screenWidth = Int32.Parse(strs[1]);
+            gs.screenHeight = Int32.Parse(strs[2]);
+            if (callback != null)
+                callback(0, gs);
+        }
+        else
+        {
+            callback(-1, new GeneralSetting());
+        }
     }
     #endregion
 }
