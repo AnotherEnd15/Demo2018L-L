@@ -55,7 +55,8 @@ public class ServerSDK {
         }
         else
         {
-            callback(-1, new GeneralSetting());
+            if (callback != null)
+                callback(-1, new GeneralSetting());
         }
     }
     #endregion
