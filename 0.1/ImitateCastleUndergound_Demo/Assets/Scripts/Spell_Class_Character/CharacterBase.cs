@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CharacterBase :MonoBehaviour,IObjectDataBase{
-    public string Name
+namespace lzr
+{
+    public class CharacterBase : MonoBehaviour, IObjectDataBase
     {
-        get; set;
+        public string Name
+        {
+            get; set;
+        }
+        public string ID
+        {
+            get; set;
+        }
     }
-    public string ID
-    {
-        get; set;
-    }
-
 }
